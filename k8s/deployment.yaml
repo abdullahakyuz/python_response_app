@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-github-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-github-app
+  template:
+    metadata:
+      labels:
+        app: python-github-app
+    spec:
+      containers:
+      - name: python-github-app
+        image: aakyuz1/etl-app:latest
+        ports:
+        - containerPort: 80
+        - containerPort: 8000
+        volumeMounts:
+        - name: python-github-app-pv
+          mountPath: /mnt/data
+      volumes:
+      - name: python-github-app-pv
+        persistentVolumeClaim:
+          claimName: python-github-app-pvc
