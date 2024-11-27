@@ -117,7 +117,7 @@ resource "aws_instance" "worker" {
   ami                    = "ami-0d64bb532e0502c46"
   instance_type          = "t2.medium"
   subnet_id              = aws_subnet.subnet_1.id
-  key_name               = var.key_name  # Burada PEM anahtarınızın adı olacak
+  key_name               = var.key_name  
   vpc_security_group_ids = [aws_security_group.k8s_sg.id]
   user_data              = file("worker.sh")
   iam_instance_profile   = aws_iam_instance_profile.ec2_connect_role.name
