@@ -36,4 +36,6 @@ This project is a standardized response library for APIs built with Python. It h
   ```bash
   git clone https://github.com/abdullahakyuz/python_response_app.git
   cd python_response_app
+
+ ```bash
 python app.py
