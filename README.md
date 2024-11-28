@@ -42,7 +42,9 @@ This project utilizes **2 AWS EC2 instances**:
 - Log in to Docker and upload the image to your Docker Hub.
 
     ```bash
-    docker build .
+    docker build -t my-python-app:latest .
+    docker run -d -p 5000:5000 --name my-python-container my-python-app:latest
+
     ```
 
 ### Congratulations! Your Project is now running!
