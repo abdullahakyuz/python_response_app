@@ -2,63 +2,83 @@
 
 This project is a Python-based API application integrated with DevOps tools like Terraform, Docker, Kubernetes, and Jenkins. It provides a fully automated and scalable infrastructure, deployed on AWS EC2 instances. Monitoring is included via Prometheus and Grafana.
 
----
-
 ## Prerequisites
 
-Before starting, ensure you have the following installed and configured:
+Before you begin, make sure you have the following installed and configured:
 
-- **AWS CLI** and an AWS account
-- **Terraform**
+- **AWS EC2 instances**
 - **Docker**
-- **Kubernetes** (Minikube or AWS EKS recommended)
+- **Kubernetes**
 - **Jenkins**
-- **Prometheus & Grafana**
+- **Terraform**
+- **Prometheus & Grafana** (for monitoring)
+
+## Project Structure
+
+### AWS EC2 Infrastructure with Terraform
+
+The infrastructure for this project is managed using **Terraform**. To set up the architecture, follow these steps:
+
+1. Review and customize the **Terraform** files to suit your environment.
+2. Initialize the Terraform directory by running:
+    ```bash
+    terraform init
+    ```
+3. Apply the configuration to create resources in AWS:
+    ```bash
+    terraform apply
+    ```
+
+This project utilizes **2 AWS EC2 instances**:
+
+- **Master-node**: Acts as the **Kubernetes master-node**.
+- **Worker-node**: Serves as the **Kubernetes worker-node**.
+
+### Docker Setup
+
+#### Docker Image
+
+- The Docker image can be built from the `Dockerfile` located in the main directory.
+- Log in to Docker and upload the image to your Docker Hub.
+
+    ```bash
+    docker build .
+    ```
+
+### Congratulations! Your Project is now running!
+
+## Kubernetes Setup
+
+To run the project on **Kubernetes**, utilize the configuration files in the `k8s` directory. This setup includes:
+
+- **Prometheus** and **Grafana** for monitoring.
+
+You can access **Grafana** at port `32000` to view project metrics and monitor your application.
+
+To deploy the project on Kubernetes, run:
+
+
+    ```bash
+    kubectl apply -f /k8s
+    ```
+
+## Congratulations! Your project is now running on Kubernetes with auto-scaling.
 
 ---
 
-## Project Overview
+## CI/CD with Jenkins
 
-### AWS Infrastructure with Terraform
+To integrate your project into a **CI/CD pipeline** using **Jenkins**:
 
-The project uses **Terraform** to manage AWS resources. This setup deploys two EC2 instances:
-- **App Server**: Hosts the Python application.
-- **Database Server**: Runs MongoDB.
+1. Access the **Jenkins** server at port `8080`.
+2. Set up a **GitHub Webhook** to trigger builds from your GitHub repository.
+3. Install the necessary **Jenkins plugins** for **Docker** and **Kubernetes** support.
+4. Create a **Jenkins pipeline** using the `Jenkinsfile` located in the project’s root directory to automate the entire process.
 
-Steps to set up the infrastructure:
-1. Navigate to the `terraform` directory.
-2. Initialize Terraform:
-   ```bash
-   terraform init
-terraform apply
+With Jenkins, you can easily automate deployments and manage your **CI/CD workflows**!
 
-This creates the required EC2 instances with security groups and necessary IAM roles.
+---
 
-Docker Setup
-Building the Docker Image
+## Conclusion
 
-1.    Clone the repository:
-
-    git clone https://github.com/abdullahakyuz/python_response_app.git
-cd python_response_app
-
-
-2.    Build the Docker image:
-  docker build -t your-dockerhub/python-response-app .
-
-3.    Push the image to Docker Hub:
-  docker push your-dockerhub/python-response-app
-
-### Running Locally
-
-You can test the application locally using the following command:
-docker run -p 5000:5000 your-dockerhub/python-response-app
-
-## Kubernetes Deployment
-
-Use the Kubernetes YAML files located in the k8s/ directory to deploy the application.
-
-Steps to deploy:
-
-1.    Apply the deployment configuration:
-  kubectl apply -f k8s/
+By following this guide, you can deploy and manage a **Python-based API** with a robust, automated, and scalable setup using Terraform, Docker, Kubernetes, and Jenkins. Observability is enhanced through Prometheus and Grafana, providing a production-ready environment for your application.
