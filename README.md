@@ -41,6 +41,7 @@ This project is a standardized response library for APIs built with Python. It h
 python app.py
 docker build -t python-response-app .
 docker run -p 5000:5000 python-response-app
+```
 
 ### 2. Deploy to Kubernetes
 
