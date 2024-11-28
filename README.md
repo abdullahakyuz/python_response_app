@@ -1,52 +1,64 @@
-# Python Response App
+# Python Response App with Terraform, Docker, Kubernetes, and Jenkins
 
-This project is a standardized response library for APIs built with Python. It helps to manage API responses in a consistent format, making it easier to work with various web frameworks like Flask. This guide includes steps to containerize, deploy, and monitor the app using Docker, Kubernetes, Jenkins, and Terraform.
-
----
-
-## Features
-
-- **Standardized API Responses:** Easily manage success and error messages in a uniform format.
-- **Dockerized Environment:** Portable and consistent containerized application.
-- **Kubernetes Deployment:** Scalable deployment on Kubernetes clusters.
-- **CI/CD Pipeline:** Automated build and deployment using Jenkins.
-- **Infrastructure as Code:** Terraform configuration for cloud resource management.
-- **Monitoring:** Metrics and logs integrated using Prometheus and Grafana.
+This project is a Python-based API application integrated with DevOps tools like Terraform, Docker, Kubernetes, and Jenkins. It provides a fully automated and scalable infrastructure, deployed on AWS EC2 instances. Monitoring is included via Prometheus and Grafana.
 
 ---
 
 ## Prerequisites
 
-1. **Local Tools:**
-   - Docker & Docker Compose
-   - Kubernetes (Minikube or any managed Kubernetes service)
-   - Jenkins
-   - Terraform
-   - Helm (optional for monitoring tools)
-   
-2. **Cloud Platform:** AWS (for Terraform setup; adapt for others if required).
+Before starting, ensure you have the following installed and configured:
+
+- **AWS CLI** and an AWS account
+- **Terraform**
+- **Docker**
+- **Kubernetes** (Minikube or AWS EKS recommended)
+- **Jenkins**
+- **Prometheus & Grafana**
 
 ---
 
-## Getting Started
+## Project Overview
 
-### 1. Local Development
+### AWS Infrastructure with Terraform
 
-- Clone the repository:
-  ```bash
-  git clone https://github.com/abdullahakyuz/python_response_app.git
-  cd python_response_app
+The project uses **Terraform** to manage AWS resources. This setup deploys two EC2 instances:
+- **App Server**: Hosts the Python application.
+- **Database Server**: Runs MongoDB.
 
- ```bash
-python app.py
-docker build -t python-response-app .
-docker run -p 5000:5000 python-response-app
-```
+Steps to set up the infrastructure:
+1. Navigate to the `terraform` directory.
+2. Initialize Terraform:
+   ```bash
+   terraform init
+terraform apply
 
-### 2. Deploy to Kubernetes
+This creates the required EC2 instances with security groups and necessary IAM roles.
 
- ```bash
-kubectl apply -f /k8s
-```
+Docker Setup
+Building the Docker Image
 
-### 3. CI/CD Pipeline with Jenkins
+1.    Clone the repository:
+
+    git clone https://github.com/abdullahakyuz/python_response_app.git
+cd python_response_app
+
+
+2.    Build the Docker image:
+  docker build -t your-dockerhub/python-response-app .
+
+3.    Push the image to Docker Hub:
+  docker push your-dockerhub/python-response-app
+
+### Running Locally
+
+You can test the application locally using the following command:
+docker run -p 5000:5000 your-dockerhub/python-response-app
+
+## Kubernetes Deployment
+
+Use the Kubernetes YAML files located in the k8s/ directory to deploy the application.
+
+Steps to deploy:
+
+1.    Apply the deployment configuration:
+  kubectl apply -f k8s/
