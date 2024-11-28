@@ -47,3 +47,6 @@ docker run -p 5000:5000 python-response-app
 
  ```bash
 kubectl apply -f /k8s
+```
+
+### 3. CI/CD Pipeline with Jenkins
